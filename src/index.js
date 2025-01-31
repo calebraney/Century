@@ -1,6 +1,10 @@
 import { attr } from './utilities';
+import { accordion } from './interactions/accordion';
 import { hoverActive } from './interactions/hover-active';
+import { load } from './interactions/load';
+import { initLenis } from './interactions/lenis';
 import { scrollIn } from './interactions/scroll-in';
+import { createSlider } from './interactions/slider';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Comment out for production
@@ -15,6 +19,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //////////////////////////////
   //Global Variables
+  let lenis;
+
+  //////////////////////////////
+  //Slider instances
+  const caseGallerySlider = function () {
+    const COMPONENT = '.case-gallery-slider_component';
+    const components = [...document.querySelectorAll(COMPONENT)];
+    const options = {
+      slidesPerView: 'auto',
+      loop: true,
+    };
+    //apply a module with defaults settings (canc override them using the options object above)
+    const modules = {
+      navigation: true,
+      pagination: false,
+      scrollbar: false,
+      autoplay: false,
+    };
+    const sliders = createSlider(components, options, modules);
+  };
 
   //////////////////////////////
   //Control Functions on page load
@@ -30,11 +54,15 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       (gsapContext) => {
         let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
+        lenis = initLenis();
+        // accordion(gsapContext);
+        // load(gsapContext)
+
         //functional interactions
         hoverActive(gsapContext);
         //conditional interactions
         if (!reduceMotion) {
-          scrollIn(gsapContext);
+          // scrollIn(gsapContext);
         }
       }
     );
