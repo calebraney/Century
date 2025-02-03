@@ -3,6 +3,7 @@ import { accordion } from './interactions/accordion';
 import { hoverActive } from './interactions/hover-active';
 import { load } from './interactions/load';
 import { initLenis } from './interactions/lenis';
+import { marquee } from './interactions/marquee';
 import { scrollIn } from './interactions/scroll-in';
 import { createSlider } from './interactions/slider';
 
@@ -23,11 +24,64 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //////////////////////////////
   //Slider instances
-  const caseGallerySlider = function () {
-    const COMPONENT = '.case-gallery-slider_component';
+  const homeStatsSlider = function () {
+    const COMPONENT = '.stats_component';
     const components = [...document.querySelectorAll(COMPONENT)];
     const options = {
       slidesPerView: 'auto',
+      direction: 'vertical',
+      loop: true,
+    };
+    //apply a module with defaults settings (canc override them using the options object above)
+    const modules = {
+      navigation: false,
+      pagination: true,
+      scrollbar: false,
+      autoplay: true,
+    };
+    const sliders = createSlider(components, options, modules);
+  };
+
+  const historySlider = function () {
+    const COMPONENT = '.timeline_component';
+    const components = [...document.querySelectorAll(COMPONENT)];
+    const options = {
+      slidesPerView: 'auto',
+      loop: false,
+    };
+    //apply a module with defaults settings (canc override them using the options object above)
+    const modules = {
+      navigation: true,
+      pagination: false,
+      scrollbar: false,
+      autoplay: true,
+    };
+    const sliders = createSlider(components, options, modules);
+  };
+
+  const testimonialSlider = function () {
+    const COMPONENT = '.testimonial_component';
+    const components = [...document.querySelectorAll(COMPONENT)];
+    const options = {
+      slidesPerView: 1,
+      speed: 1200,
+      loop: false,
+    };
+    //apply a module with defaults settings (canc override them using the options object above)
+    const modules = {
+      navigation: true,
+      pagination: true,
+      scrollbar: false,
+      autoplay: false,
+    };
+    const sliders = createSlider(components, options, modules);
+  };
+
+  const careersCardSlider = function () {
+    const COMPONENT = '.card-slider_component';
+    const components = [...document.querySelectorAll(COMPONENT)];
+    const options = {
+      slidesPerView: 1,
       loop: true,
     };
     //apply a module with defaults settings (canc override them using the options object above)
@@ -57,9 +111,14 @@ document.addEventListener('DOMContentLoaded', function () {
         lenis = initLenis();
         // accordion(gsapContext);
         // load(gsapContext)
-
+        //sliders
+        homeStatsSlider();
+        historySlider();
+        testimonialSlider();
+        careersCardSlider();
         //functional interactions
         hoverActive(gsapContext);
+        marquee(gsapContext);
         //conditional interactions
         if (!reduceMotion) {
           // scrollIn(gsapContext);

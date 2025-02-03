@@ -35,6 +35,7 @@ export const createSlider = function (components, options, modules) {
     const defaultSettings = {
       speed: 800,
       spaceBetween: 16,
+      direction: 'horizontal',
       loop: false,
       centeredSlides: false,
       allowTouchMove: true,
