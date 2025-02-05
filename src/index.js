@@ -5,6 +5,7 @@ import { load } from './interactions/load';
 import { initLenis } from './interactions/lenis';
 import { marquee } from './interactions/marquee';
 import { scrollIn } from './interactions/scroll-in';
+import { scrolling } from './interactions/scrolling';
 import { createSlider } from './interactions/slider';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -95,6 +96,94 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   //////////////////////////////
+  //Unique Interactions
+
+  const patnerNumbers = function () {
+    const COMPONENT = '[data-ix-partner="wrap"]';
+    const NUMBER = '[data-ix-partner="number"]';
+    const ITEM = '[data-ix-partner="item"]';
+
+    //elements
+    const components = [...document.querySelectorAll(COMPONENT)];
+
+    //guard clause
+    if (!components.length === 0) return;
+    components.forEach(function (component, index) {
+      const numbers = [...component.querySelectorAll(NUMBER)];
+      const items = [...component.querySelectorAll(ITEM)];
+      if (!items.length === 0) return;
+
+      //for each item
+      items.forEach(function (item, index) {
+        const itemNumber = numbers[index];
+        const prevNumber = numbers[index - 1];
+        const nextNumber = numbers[index + 1];
+        //except on first item
+        if (index !== 0) {
+          let scrollIn = gsap.timeline({
+            defaults: {
+              duration: 1,
+              ease: 'power2.out',
+            },
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 90%',
+              end: 'top 50%',
+              scrub: true,
+            },
+          });
+          scrollIn.set(
+            itemNumber,
+            {
+              opacity: 1,
+            },
+            '<'
+          );
+          scrollIn.to(
+            prevNumber,
+            {
+              yPercent: -100,
+            },
+            '<'
+          );
+          scrollIn.fromTo(
+            itemNumber,
+            {
+              yPercent: 100,
+            },
+            {
+              yPercent: 0,
+            },
+            '<'
+          );
+        }
+
+        // let scrollOut = gsap.timeline({
+        //   defaults: {
+        //     duration: 1,
+        //     ease: 'power2.out',
+        //   },
+        //   scrollTrigger: {
+        //     trigger: item,
+        //     start: 'top 90%',
+        //     end: 'top 75%',
+        //     scrub: true,
+        //   },
+        // });
+        // scrollOut.to(
+        //   numbers,
+        //   {
+        //     yPercent: 0,
+        //   },
+        //   {
+        //     yPercent: 50,
+        //   }
+        // );
+      });
+    });
+  };
+
+  //////////////////////////////
   //Control Functions on page load
   const gsapInit = function () {
     let mm = gsap.matchMedia();
@@ -119,9 +208,11 @@ document.addEventListener('DOMContentLoaded', function () {
         //functional interactions
         hoverActive(gsapContext);
         marquee(gsapContext);
+        patnerNumbers();
         //conditional interactions
         if (!reduceMotion) {
-          // scrollIn(gsapContext);
+          scrollIn(gsapContext);
+          scrolling(gsapContext);
         }
       }
     );
