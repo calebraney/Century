@@ -8,9 +8,10 @@ import { scrollIn } from './interactions/scroll-in';
 import { scrolling } from './interactions/scrolling';
 import { createSlider } from './interactions/slider';
 
-document.addEventListener('DOMContentLoaded', function () {
+var Webflow = Webflow || [];
+Webflow.push(function () {
   // Comment out for production
-  console.log('Local Script');
+  // console.log('Local Script');
   // register gsap plugins if available
   if (gsap.ScrollTrigger !== undefined) {
     gsap.registerPlugin(ScrollTrigger);
@@ -197,17 +198,17 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       (gsapContext) => {
         let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
+        load(gsapContext);
+        accordion(gsapContext);
+        marquee(gsapContext);
         lenis = initLenis();
-        // accordion(gsapContext);
-        // load(gsapContext)
-        //sliders
+        // sliders;
         homeStatsSlider();
         historySlider();
         testimonialSlider();
         careersCardSlider();
         //functional interactions
         hoverActive(gsapContext);
-        marquee(gsapContext);
         patnerNumbers();
         //conditional interactions
         if (!reduceMotion) {
