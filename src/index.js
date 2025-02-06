@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
       navigation: true,
       pagination: false,
       scrollbar: false,
-      autoplay: true,
+      autoplay: false,
     };
     const sliders = createSlider(components, options, modules);
   };
