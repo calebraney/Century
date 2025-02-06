@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
       navigation: false,
       pagination: true,
       scrollbar: false,
-      autoplay: true,
+      autoplay: { delay: 5000 },
     };
     const sliders = createSlider(components, options, modules);
   };
