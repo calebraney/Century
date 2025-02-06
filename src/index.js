@@ -8,8 +8,7 @@ import { scrollIn } from './interactions/scroll-in';
 import { scrolling } from './interactions/scrolling';
 import { createSlider } from './interactions/slider';
 
-var Webflow = Webflow || [];
-Webflow.push(function () {
+document.addEventListener('DOMContentLoaded', function () {
   // Comment out for production
   // console.log('Local Script');
   // register gsap plugins if available
@@ -198,10 +197,10 @@ Webflow.push(function () {
       },
       (gsapContext) => {
         let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
+        lenis = initLenis();
         load(gsapContext);
         accordion(gsapContext);
         marquee(gsapContext);
-        lenis = initLenis();
         // sliders;
         homeStatsSlider();
         historySlider();
