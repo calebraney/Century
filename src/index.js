@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const COMPONENT = '.stats_component';
     const components = [...document.querySelectorAll(COMPONENT)];
     const options = {
-      slidesPerView: 'auto',
       direction: 'vertical',
       loop: true,
     };
@@ -47,7 +46,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const COMPONENT = '.timeline_component';
     const components = [...document.querySelectorAll(COMPONENT)];
     const options = {
-      slidesPerView: 'auto',
+      spaceBetween: 32,
+      slidesPerView: 2,
+      breakpoints: {
+        // when window width is >= 320px
+        100: {
+          slidesPerView: 1,
+        },
+        479: {
+          slidesPerView: 1.5,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+      },
       loop: false,
     };
     //apply a module with defaults settings (canc override them using the options object above)
