@@ -1,4 +1,4 @@
-import { classWatcher } from '../utilities';
+import { ClassWatcher } from '../utilities';
 
 export const toggleNavScroll = function (lenis) {
   const NAV_BUTTON = '.navbar_menu-button'; //default is .w-nav-button
