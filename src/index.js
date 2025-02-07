@@ -7,6 +7,7 @@ import { marquee } from './interactions/marquee';
 import { scrollIn } from './interactions/scroll-in';
 import { scrolling } from './interactions/scrolling';
 import { createSlider } from './interactions/slider';
+import { toggleNavScroll } from './interactions/toggle-nav-scroll';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Comment out for production
@@ -211,6 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
         lenis = initLenis();
         load(gsapContext);
+        toggleNavScroll(lenis);
         accordion(gsapContext);
         marquee(gsapContext);
         // sliders;
