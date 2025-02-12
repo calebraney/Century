@@ -6,6 +6,7 @@ export const initLenis = function () {
     duration: 1,
     easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)), // https://easings.net
     touchMultiplier: 1.5,
+    autoResize: true,
   });
   // lenis request animation from
   function raf(time) {
@@ -28,17 +29,17 @@ export const initLenis = function () {
   //Control Scrolling
 
   // re-calculate scroll length when clicked
-  function refreshScroll() {
-    const triggers = [...document.querySelectorAll('[scroll="refresh"]')];
-    if (triggers.length === 0) return;
-    triggers.forEach((item) => {
-      if (!target) return;
-      item.addEventListener('click', (event) => {
-        lenis.resize();
-      });
-    });
-  }
-  refreshScroll();
+  // function refreshScroll() {
+  //   const triggers = [...document.querySelectorAll('[scroll="refresh"]')];
+  //   if (triggers.length === 0) return;
+  //   triggers.forEach((item) => {
+  //     if (!target) return;
+  //     item.addEventListener('click', (event) => {
+  //       lenis.resize();
+  //     });
+  //   });
+  // }
+  // refreshScroll();
 
   function refreshScrollOnLazyLoad() {
     const images = [...document.querySelectorAll("img[loading='lazy']")];
