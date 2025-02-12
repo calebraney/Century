@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       (gsapContext) => {
         let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
-        lenis = initLenis();
+        // lenis = initLenis();
         load(gsapContext);
         toggleNavScroll(lenis);
         accordion(gsapContext);
