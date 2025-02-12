@@ -27,6 +27,39 @@ export const initLenis = function () {
   ////////////////////////////
   //Control Scrolling
 
+  // re-calculate scroll length when clicked
+  function refreshScroll() {
+    const triggers = [...document.querySelectorAll('[scroll="refresh"]')];
+    if (triggers.length === 0) return;
+    triggers.forEach((item) => {
+      if (!target) return;
+      item.addEventListener('click', (event) => {
+        lenis.resize();
+      });
+    });
+  }
+  refreshScroll();
+
+  function refreshScrollOnLazyLoad() {
+    const images = [...document.querySelectorAll("img[loading='lazy']")];
+    if (images.length === 0) return;
+    let resizeTimeout;
+
+    function refreshLenisTimeout() {
+      clearTimeout(resizeTimeout); // Cancel previous resize calls
+      resizeTimeout = setTimeout(() => {
+        requestAnimationFrame(() => {
+          lenis.resize(); // Recalculate dimensions inside requestAnimationFrame for smoother transitions
+        });
+      }, 300); // Adjust delay as needed
+    }
+
+    images.forEach((img) => {
+      img.addEventListener('load', refreshLenisTimeout);
+    });
+  }
+  // refreshScrollOnLazyLoad();
+
   // anchor links
   function anchorLinks() {
     const anchorLinks = document.querySelectorAll('[scroll-to]');
